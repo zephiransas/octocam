@@ -6,6 +6,10 @@ class Octocam::Client
 
   def generate
     args = Argument.new
+    if !args.owner && !args.repository
+      puts 'Usage: octocam -o [owner] -r [repository] -f [merged_from] -t [merged_to]'
+      exit
+    end
 
     Octokit.auto_paginate = true
     client = Octokit::Client.new(access_token: ENV['OCTOCAM_GITHUB_TOKEN'])
