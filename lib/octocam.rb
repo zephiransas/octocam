@@ -1,5 +1,8 @@
 require "octocam/version"
+require 'octocam/client'
 
 module Octocam
-  # Your code goes here...
+  def self.generate
+    Octocam::Client.new.generate
+  end
 end

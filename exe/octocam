@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
-p 'Pending....'
+require 'octocam'
+
+Octocam.generate
