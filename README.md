@@ -4,19 +4,19 @@ Octocam generate simple CHANGELOG with Markdown from GitHub pull requests.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'octocam'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install octocam
+
+### GitHub Token
+
+If you want to generate CHANGELOG from private repo, set OCTOCAM_GITHUB_TOKEN to your environment variable.
+
+**You can easily [generate it here](https://github.com/settings/applications)**.
+
+Then, add to your `~/.bash_profile` or `~/.zshrc` or any other place to load ENV variables string.
+
+```
+export OCTOCAM_GITHUB_TOKEN="your-40-digit-github-token"
+```
 
 ## Usage
 
