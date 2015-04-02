@@ -25,11 +25,13 @@ octocam -o zephiransas -r octocam -f 2015-01-01 -t 2015-01-31
 ```
 
 ```
--o  (required) owner of the GitHub repository
--r  (required) name of the GitHub repository
+-o  owner of the GitHub repository
+-r  name of the GitHub repository
 -f  (required) start of merged at
 -t  (required) end of merged at
 ```
+
+If your current directory is git local repository, owner and repository value will auto detected from your git remote(origin).
 
 ## Development
 
