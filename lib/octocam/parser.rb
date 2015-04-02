@@ -42,11 +42,38 @@ module Octocam
       end
 
       if !options[:owner] || !options[:repository]
+        options[:owner], options[:repository] = detect_owner_and_repository
+      end
+
+      if !options[:owner] || !options[:repository]
         puts parser.banner
         exit
       end
 
       options
     end
+
+    private
+
+    def self.detect_owner_and_repository
+      remote = `git config --get remote.origin.url`
+
+      # git@github.com:zephiransas/octocam.git
+      match = /.*(?:[:\/])((?:-|\w|\.)*)\/((?:-|\w|\.)*)(?:\.git).*/.match(remote)
+      if match
+        puts "Detected owner:#{match[1]}, repository:#{match[2]}"
+        return [match[1], match[2]]
+      end
+
+      # https://github.com/zephiransas/octocam
+      match = /.*\/((?:-|\w|\.)*)\/((?:-|\w|\.)*).*/.match(remote)
+      if match
+        puts "Detected owner:#{match[1]}, repository:#{match[2]}"
+        return [match[1], match[2]]
+      end
+
+      []
+    end
+
   end
 end
