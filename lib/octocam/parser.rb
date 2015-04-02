@@ -12,6 +12,7 @@ module Octocam
 
       parser = OptionParser.new do |opts|
         opts.banner = 'Usage: octocam -o [owner] -r [repository] -f [merged_from] -t [merged_to]'
+        opts.version = Octocam::VERSION
 
         opts.accept(Time) do |s|
           begin
