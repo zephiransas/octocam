@@ -2,7 +2,10 @@ require 'optparse'
 
 module Octocam
   class Parser
-    def self.parse_options
+
+    BANNER = 'Usage: octocam -o [owner] -r [repository] -f [merged_from] -t [merged_to]'.freeze
+
+    def self.parse_options(args)
       options = {
           owner: nil,
           repository: nil,
@@ -10,8 +13,8 @@ module Octocam
           to: nil
       }
 
-      parser = OptionParser.new do |opts|
-        opts.banner = 'Usage: octocam -o [owner] -r [repository] -f [merged_from] -t [merged_to]'
+      OptionParser.new do |opts|
+        opts.banner = BANNER
         opts.version = Octocam::VERSION
 
         opts.accept(Time) do |s|
@@ -34,21 +37,11 @@ module Octocam
         opts.on('-t YYYY-MM-DD', Time, 'To date of merged date') do |v|
           options[:to] = v
         end
-        opts.parse!(ARGV)
-      end
-
-      if !options[:from] || !options[:to]
-        puts parser.banner
-        exit
+        opts.parse(args)
       end
 
       if !options[:owner] || !options[:repository]
         options[:owner], options[:repository] = detect_owner_and_repository
-      end
-
-      if !options[:owner] || !options[:repository]
-        puts parser.banner
-        exit
       end
 
       options

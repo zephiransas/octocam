@@ -6,7 +6,12 @@ require 'octocam/parser'
 class Octocam::Client
 
   def generate
-    options = Octocam::Parser.parse_options
+    options = Octocam::Parser.parse_options(ARGV)
+
+    if !options[:owner] || !options[:repository] || !options[:from] || !options[:to]
+      puts Octocam::Parser::BANNER
+      exit
+    end
 
     Octokit.auto_paginate = true
     client = Octokit::Client.new(access_token: ENV['OCTOCAM_GITHUB_TOKEN'])
