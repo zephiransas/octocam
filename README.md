@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zephiransas/octocam.svg?branch=master)](https://travis-ci.org/zephiransas/octocam)
+
 # Octocam
 
 Octocam generate simple CHANGELOG with Markdown from GitHub pull requests.
