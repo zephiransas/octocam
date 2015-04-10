@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Octocam::Parser do
   context 'parse_options' do
     before do
-      Octocam::Parser.stub(:detect_owner_and_repository){ [ nil, nil ] }
+      allow(Octocam::Parser).to receive(:detect_owner_and_repository){ [ nil, nil ] }
     end
 
     subject{ Octocam::Parser.parse_options(arg) }
@@ -26,12 +26,12 @@ describe Octocam::Parser do
 
     context 'Raise error with invalid Date' do
       let(:arg){ %w(-o zephiransas -r octocam -f 2015-01-01 -t hoge) }
-      it{ lambda{ Octocam::Parser.parse_options(arg) }.should raise_error RuntimeError }
+      it{ expect{ Octocam::Parser.parse_options(arg) }.to raise_error(RuntimeError) }
     end
 
     context 'At git remote repository' do
       before do
-        Octocam::Parser.stub(:detect_owner_and_repository){ [ 'zephiransas', 'octocam' ] }
+        allow(Octocam::Parser).to receive(:detect_owner_and_repository){ [ 'zephiransas', 'octocam' ] }
       end
       let(:arg){ nil }
       it{ expect(subject[:owner]).to eq 'zephiransas' }
