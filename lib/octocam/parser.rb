@@ -3,12 +3,13 @@ require 'optparse'
 module Octocam
   class Parser
 
-    BANNER = 'Usage: octocam -o [owner] -r [repository] -f [merged_from] -t [merged_to]'.freeze
+    BANNER = 'Usage: octocam [OPTIONS]'.freeze
 
     def self.parse_options(args)
       options = {
           owner: nil,
           repository: nil,
+          base: 'develop',
           from: nil,
           to: nil
       }
@@ -30,6 +31,9 @@ module Octocam
         end
         opts.on('-r [NAME]', 'target repository name') do |v|
           options[:repository] = v
+        end
+        opts.on('-b [NAME]', "base branch name (default:'develop')") do |v|
+          options[:base] = v
         end
         opts.on('-f YYYY-MM-DD', Time, 'From date of merged date') do |v|
           options[:from] = v
